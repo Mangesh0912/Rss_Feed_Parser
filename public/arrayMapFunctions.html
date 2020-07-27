@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+
+<body>
+
+    <script>
+        
+        var arr = [1,2,3,4];
+
+        Array.prototype.map = function(fn) {
+            var newArr = [];
+            var currentArr = this;
+
+            if(!currentArr || (currentArr && currentArr.length == 0)) {
+                return newArr;
+            }
+            for(let i = 0 ; i < currentArr.length; i ++) {
+                 newArr.push(fn(currentArr[i], i));
+            }
+            return newArr;
+        }
+
+        var finalArr = arr.map((v, index) => v * 2);
+        console.log("Final arr is:", finalArr)
+
+        Array.prototype.reduce = function(fn) {
+            var newArr = [];
+            var currentArr = this;
+            var accumulator = arr[0];
+
+            if(!currentArr || (currentArr && currentArr.length == 0)) {
+                return newArr;
+            }
+            for(let i = 1 ; i < currentArr.length; i++) {
+                 var result = fn(accumulator, arr[i]);
+                 if(i < currentArr.length - 1) {
+                     accumulator = result;
+                 }
+            }
+
+            return result;
+        }
+
+        arr.reduce( (a, c) => a + c + 5);
+
+        Array.prototype.filter = function(fn) {
+            var newArr = [];
+            var currentArr = this;
+            
+            if(!currentArr || (currentArr && currentArr.length == 0)) {
+                  return newArr;
+            }
+           
+            for(let i = 0 ; i < currentArr.length; i++) {
+                 var result = fn(currentArr[i]);
+                 console.log("Result is:", result)
+                 if(result) {
+                    newArr.push(currentArr[i]);
+                 }
+            }
+
+            return newArr;
+
+        }
+      
+        arr.filter( (v) => v == 1);
+
+
+    </script>
+
+</body>
+
+</html>
